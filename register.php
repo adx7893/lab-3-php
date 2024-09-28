@@ -28,12 +28,12 @@ if($_SERVER['REQUEST_METHOD']=== 'POST')
     <title>Registration Page</title>
     <style>
         table {
-            margin: 0 auto; /* Center the table */
+            margin: 0 auto;
             border-collapse: collapse;
         }
         td, th {
             padding: 10px;
-            border: 1px solid #ccc; /* Add borders to the table cells */
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -60,5 +60,6 @@ if($_SERVER['REQUEST_METHOD']=== 'POST')
             </tr>
         </table>
     </form>
+    <p style="text-align: center;">Already Registered? <a href="login.php">Click here</a>.</p>
 </body>
 </html>

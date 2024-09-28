@@ -1,27 +1,22 @@
 [
     {
-        "username": "guest",
+        "username": "Apurva",
         "email": "hugebossssss@gmail.com",
-        "password": "$2y$10$nglrDH0amKKNVl5ikSnuSOZMdGhkI1G1pfc\/KasnJKwjd.28GrB4O"
-    },
-    {
-        "username": "guest",
-        "email": "apurvakansara5@gmail.com",
-        "password": "$2y$10$nG\/bNECqreTl8KdUIxPMUehxEINorSlYMvlj28QDsVtpLBmuxmEjm"
-    },
-    {
-        "username": "maharshi",
-        "email": "maharshi@gmail.com",
-        "password": "$2y$10$xP9\/1ayZlZHXO9h1dWApn.dkrzyNiJsPVpoU9cscbU85hr1c1Do\/S"
+        "password": "$2y$10$\/e5XJjZaO7GQYfZouKYRUOf.TB89vJJeO0w5IOxSaxZv8\/iFbYSUW"
     },
     {
         "username": "Apurva",
-        "email": "apurvakansara5@gmail.com",
-        "password": "$2y$10$PbxVdVO2lYB230L6vUW8Ie\/qMs3cvpzsr893ZQu0fKnpIdU\/CTGmm"
+        "email": "hugebossssss@gmail.com",
+        "password": "$2y$10$wVvjArlgwtouPBfTpSC4e.wAqc3uafUxyKk9mgs\/iSelkMp4xT.Ny"
     },
     {
-        "username": "guest",
-        "email": "lmdlm@gmail.com",
-        "password": "$2y$10$Flv6OkcoLyWEEfJLUVT6GufB230pgeYXOQKGfj4cmIvZAwYM4oAYa"
+        "username": "Apurva",
+        "email": "hugebossssss@gmail.com",
+        "password": "$2y$10$yisZpwsXWFMPkyzABX6eS.ICyC5xLjss6LZFgmYbAo6jY..5tiDce"
+    },
+    {
+        "username": "Apurva",
+        "email": "hugebossssss@gmail.com",
+        "password": "$2y$10$94FQH\/qM.rDszl0FAUTWRuekTgcXzx8EQ0U2UvgBJMKuDl7k8v71K"
     }
 ]

@@ -1,45 +1,43 @@
 <?php
 session_start();
 $error = '';
-if($_SERVER ['REQUEST_METHOD']==='POST')
-{
+
+$username = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $remember = isset($_POST['remember']);
 
-    if(!empty($username) && !empty($password))
-    {
+    if (!empty($username) && !empty($password)) {
         $userFile = 'users.json';
         $users = json_decode(file_get_contents($userFile), true) ?: [];
 
         $userFound = false;
         foreach ($users as $user) {
-            if($user['username']===$username && password_verify($password, $user['password'])){
+            if ($user['username'] === $username && password_verify($password, $user['password'])) {
                 $userFound = true;
                 $_SESSION['username'] = $username;
-                if($remember)
-                {
-                    setcookie('username', $username, time() + (86400*7), "/");
-                }
-                else{
+                
+                if ($remember) {
+                    setcookie('username', $username, time() + (86400 * 7), "/");
+                } else {
                     setcookie('username', '', time() - 3600, "/");
                 }
+
                 header('Location: job_application.php');
                 exit();
             }
         }
-        if(!$userFound)
-        {
+        
+        if (!$userFound) {
             $error = "Username or Password is invalid!!";
         }
-        else{
-            $error = "Some field is empty!!!";
-        }
+    } else {
+        $error = "Some fields are empty!!!";
     }
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,12 +47,12 @@ if($_SERVER ['REQUEST_METHOD']==='POST')
     <title>Login Page</title>
     <style>
         table {
-            margin: 0 auto; /* Center the table */
+            margin: 0 auto;
             border-collapse: collapse;
         }
         td, th {
             padding: 10px;
-            border: 1px solid #ccc; /* Add borders to the table cells */
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -67,11 +65,19 @@ if($_SERVER ['REQUEST_METHOD']==='POST')
         <table>
             <tr>
                 <th><label for="username">Username:</label></th>
-                <td><input type="text" id="username" name="username" required></td>
+                <td><input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required></td>
             </tr>
             <tr>
                 <th><label for="password">Password:</label></th>
                 <td><input type="password" id="password" name="password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label>
+                        <input type="checkbox" name="remember" <?php echo isset($_COOKIE['username']) ? 'checked' : ''; ?>>
+                        Remember Me
+                    </label>
+                </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center;">

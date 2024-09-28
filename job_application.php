@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Redirect to login if the user is not logged in
 if (!isset($_SESSION['username'])) {
     header("location:login.php");
     exit();
 }
 
-// Initialize variables
 $step = isset($_GET['step']) ? $_GET['step'] : 1;
 $successmsg = $errormsg = '';
 $steps_total = 3;
@@ -30,12 +28,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['c_name'] = $_POST['c_name'] ?? '';
             $_SESSION['y_exp'] = $_POST['y_exp'] ?? '';
             $_SESSION['key_respo'] = $_POST['key_respo'] ?? '';
-            $successmsg = "Form submitted successfully!";
-            break;
+
+            $application_data = [
+                'name' => $_SESSION['name'],
+                'email' => $_SESSION['email'],
+                'phone' => $_SESSION['number'],
+                'education' => [
+                    'degree' => $_SESSION['h_degree'],
+                    'field_of_study' => $_SESSION['f_study'],
+                    'institution' => $_SESSION['name_institution'],
+                    'graduation_year' => $_SESSION['year_graduation'],
+                ],
+                'work_experience' => [
+                    'job_title' => $_SESSION['p_j_title'],
+                    'company_name' => $_SESSION['c_name'],
+                    'years_of_experience' => $_SESSION['y_exp'],
+                    'key_responsibilities' => $_SESSION['key_respo'],
+                ]
+            ];
+            $json_data = file_exists('applications.json') ? json_decode(file_get_contents('applications.json'), true) : [];
+            $json_data[] = $application_data;
+            file_put_contents('applications.json', json_encode($json_data, JSON_PRETTY_PRINT));
+
+            header("location:review.php");
+            exit();
     }
 }
 
-// Navigation handling (Previous/Next)
 if (isset($_POST['next'])) {
     if ($step < $steps_total) {
         $step++;
@@ -46,7 +65,6 @@ if (isset($_POST['next'])) {
     }
 }
 
-// Helper function for progress percentage
 function progress_percentage($step, $steps_total) {
     return ($step / $steps_total) * 100;
 }
@@ -88,7 +106,6 @@ function progress_percentage($step, $steps_total) {
 
 <h2>Job Application - Step <?php echo $step; ?></h2>
 
-<!-- Progress bar -->
 <div class="progress">
     <div class="progress-bar"></div>
 </div>
@@ -169,28 +186,18 @@ function progress_percentage($step, $steps_total) {
             </table>
         </fieldset>
     <?php endif; ?>
-
-    <!-- Existing button section -->
+    
     <div style="text-align: center;">
         <?php if ($step > 1): ?>
             <button type="submit" name="previous">Previous</button>
         <?php endif; ?>
-
         <?php if ($step < $steps_total): ?>
             <button type="submit" name="next">Next</button>
         <?php else: ?>
-            <button type="submit" name="submit">Submit</button>
+            <button type="submit">Review your Application</button>
         <?php endif; ?>
     </div>
-
-    <!-- Add this section to provide the review link after the form is submitted -->
-    <?php if ($step == $steps_total && isset($_POST['submit'])): ?>
-        <div style="text-align: center;">
-            <a href="review.php">Review Your Application</a>
-        </div>
-    <?php endif; ?>
 </form>
 
-<p style="text-align: center;"><a href="logout.php">Logout</a></p>
 </body>
 </html>

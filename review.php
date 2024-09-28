@@ -1,23 +1,57 @@
 <?php
 session_start();
 
-// Redirect to login if the user is not logged in
 if (!isset($_SESSION['username'])) {
     header("location:login.php");
     exit();
 }
 
-// Initialize success message
 $successmsg = '';
 
 if (isset($_POST['submit'])) {
-    // Here you can handle form submission (e.g., save to the database)
+    $applicationData = [
+        'Full Name' => $_SESSION['name'] ?? '',
+        'Email' => $_SESSION['email'] ?? '',
+        'Phone Number' => $_SESSION['number'] ?? '',
+        'Highest Degree' => $_SESSION['h_degree'] ?? '',
+        'Field of Study' => $_SESSION['f_study'] ?? '',
+        'Institution Name' => $_SESSION['name_institution'] ?? '',
+        'Year of Graduation' => $_SESSION['year_graduation'] ?? '',
+        'Previous Job Title' => $_SESSION['p_j_title'] ?? '',
+        'Company Name' => $_SESSION['c_name'] ?? '',
+        'Years of Experience' => $_SESSION['y_exp'] ?? '',
+        'Key Responsibilities' => $_SESSION['key_respo'] ?? '',
+    ];
+
+    $filename = 'applications.json';
+    $applications = [];
+
+    if (file_exists($filename)) {
+        $applications = json_decode(file_get_contents($filename), true) ?: [];
+    }
+
+    $applications[] = $applicationData;
+
+    file_put_contents($filename, json_encode($applications, JSON_PRETTY_PRINT));
+
     $successmsg = "Your application has been submitted successfully!";
-    // Clear session data after submission if needed
-    // session_destroy(); // Uncomment to clear session after submission
+    $confirmationEmail = "A confirmation email has been sent to " . $_SESSION['email'] . " with the following details:\n" . json_encode($applicationData, JSON_PRETTY_PRINT);
+
+    error_log($confirmationEmail);
 }
 
-// Helper function to display session data
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy()
+    if (isset($_COOKIE['remember_me'])) {
+        unset($_COOKIE['remember_me']);
+        setcookie('remember_me', '', time() - 3600, '/');
+    }
+
+    header("location:login.php");
+    exit();
+}
+
 function display_data($label, $data) {
     return "<tr><th>{$label}:</th><td>{$data}</td></tr>";
 }
@@ -60,8 +94,9 @@ function display_data($label, $data) {
     </thead>
     <tbody>
         <?php
-        // Display collected information from session
         echo display_data("Full Name", $_SESSION['name'] ?? '');
+        error_log('Email in session: ' . ($_SESSION['email'] ?? 'Not set'));
+        
         echo display_data("Email", $_SESSION['email'] ?? '');
         echo display_data("Phone Number", $_SESSION['number'] ?? '');
         echo display_data("Highest Degree", $_SESSION['h_degree'] ?? '');
@@ -76,21 +111,34 @@ function display_data($label, $data) {
     </tbody>
 </table>
 
-<div style="text-align: center; margin-top: 20px;">
-    <form method="POST" action="job_application.php?step=1">
-        <button type="submit">Edit Personal Information</button>
-    </form>
-    <form method="POST" action="job_application.php?step=2">
-        <button type="submit">Edit Education Information</button>
-    </form>
-    <form method="POST" action="job_application.php?step=3">
-        <button type="submit">Edit Work Experience</button>
-    </form>
-    <form method="POST" action="review.php">
-        <button type="submit" name="submit">Submit Application</button>
-    </form>
-</div>
-
-<p style="text-align: center;"><a href="logout.php">Logout</a></p>
+<table style="margin: 20px auto; text-align: center;">
+    <tr>
+        <td>
+            <form method="POST" action="job_application.php?step=1">
+                <button type="submit">Edit Personal Information</button>
+            </form>
+        </td>
+        <td>
+            <form method="POST" action="job_application.php?step=2">
+                <button type="submit">Edit Education Information</button>
+            </form>
+        </td>
+        <td>
+            <form method="POST" action="job_application.php?step=3">
+                <button type="submit">Edit Work Experience</button>
+            </form>
+        </td>
+        <td>
+            <form method="POST" action="review.php">
+                <button type="submit" name="submit">Submit Application</button>
+            </form>
+        </td>
+        <td>
+            <form method="POST" action="review.php">
+                <button type="submit" name="logout">Logout</button>
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
