@@ -1,0 +1,49 @@
+[
+    {
+        "name": "new user ",
+        "email": "hugebossssss@gmail.com",
+        "phone": "64752615798",
+        "education": {
+            "degree": "bachelor",
+            "field_of_study": "information technology",
+            "institution": "GLS University",
+            "graduation_year": "2021"
+        },
+        "work_experience": {
+            "job_title": "",
+            "company_name": "",
+            "years_of_experience": "",
+            "key_responsibilities": ""
+        }
+    },
+    {
+        "name": "new user ",
+        "email": "hugebossssss@gmail.com",
+        "phone": "64752615798",
+        "education": {
+            "degree": "bachelor",
+            "field_of_study": "information technology",
+            "institution": "GLS University",
+            "graduation_year": "2021"
+        },
+        "work_experience": {
+            "job_title": "Software tester",
+            "company_name": "Agile Infoways",
+            "years_of_experience": "1",
+            "key_responsibilities": "i was a software tester"
+        }
+    },
+    {
+        "Full Name": "new user ",
+        "Email": "hugebossssss@gmail.com",
+        "Phone Number": "64752615798",
+        "Highest Degree": "bachelor",
+        "Field of Study": "information technology",
+        "Institution Name": "GLS University",
+        "Year of Graduation": "2021",
+        "Previous Job Title": "Software tester",
+        "Company Name": "Agile Infoways",
+        "Years of Experience": "1",
+        "Key Responsibilities": "i was a software tester"
+    }
+]

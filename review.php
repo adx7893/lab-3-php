@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 
 if (isset($_POST['logout'])) {
     session_unset();
-    session_destroy()
+    session_destroy();
     if (isset($_COOKIE['remember_me'])) {
         unset($_COOKIE['remember_me']);
         setcookie('remember_me', '', time() - 3600, '/');

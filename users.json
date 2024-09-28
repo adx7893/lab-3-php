@@ -18,5 +18,10 @@
         "username": "Apurva",
         "email": "hugebossssss@gmail.com",
         "password": "$2y$10$94FQH\/qM.rDszl0FAUTWRuekTgcXzx8EQ0U2UvgBJMKuDl7k8v71K"
+    },
+    {
+        "username": "new_user",
+        "email": "hugebossssss@gmail.com",
+        "password": "$2y$10$GkboIP7LM3eJmUq08t6hwOghgL5eB4zbfsl1W5cuQegpdjDaEcXKC"
     }
 ]
