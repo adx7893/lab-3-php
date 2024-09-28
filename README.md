@@ -65,17 +65,3 @@ logout.php              # Logout functionality
 users.json              # Stores registered user data
 applications.json       # Stores submitted job applications
 style.css               # Optional CSS for styling (if applicable)
-Evaluation Criteria
-User Authentication (30%): Implementation of user registration and login, proper session and cookie management, functionality of the "Remember Me" feature.
-Form Design and Functionality (30%): Well-structured multi-step form, data persistence using sessions.
-Data Validation and Security (20%): Input validation and sanitization, secure handling of user data.
-Code Quality and Documentation (20%): Clean, well-commented code, organized project structure.
-Submission
-I will submit the entire project folder and the GitHub repository link.
-I ensure all PHP, HTML, CSS files, and JSON files are included in the submission.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Acknowledgments
-I want to thank [Instructor Name] for guidance and support throughout this project.
-Resources and references I used for PHP sessions, cookies, and authentication handling. """
